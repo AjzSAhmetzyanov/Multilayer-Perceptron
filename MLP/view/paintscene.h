@@ -10,6 +10,7 @@
 #include <vector>
 #include <QPainter>
 #include <QPaintEvent>
+#include <QBuffer>
 
 class paintscene : public QGraphicsScene
 {
@@ -26,6 +27,7 @@ public:
 private:
     QPointF  previousPoint;      // Координаты предыдущей точки
     QImage image_ {};
+    QImage image;
     QImage resized_image_ {};
     QPoint points {};
     std::vector<double> v_pixels {};

@@ -1,17 +1,12 @@
 #include "paintscene.h"
-
-paintscene::paintscene(QObject *parent) : QGraphicsScene(parent)
-{
-
+#include <QDebug>
+paintscene::paintscene(QObject *parent) : QGraphicsScene(parent) {
 }
 
-paintscene::~paintscene()
-{
-
+paintscene::~paintscene() {
 }
 
-void paintscene::mousePressEvent(QGraphicsSceneMouseEvent *event)
-{
+void paintscene::mousePressEvent(QGraphicsSceneMouseEvent *event) {
     // При нажатии кнопки мыши отрисовываем эллипс
     addEllipse(event->scenePos().x() - 5,
                event->scenePos().y() - 5,
@@ -21,12 +16,9 @@ void paintscene::mousePressEvent(QGraphicsSceneMouseEvent *event)
                QBrush(Qt::black));
     // Сохраняем координаты точки нажатия
     previousPoint = event->scenePos();
-//    v_points.push_back();
-
 }
 
-void paintscene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
-{
+void paintscene::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
     // Отрисовываем линии с использованием предыдущей координаты
     addLine(previousPoint.x(),
             previousPoint.y(),
@@ -35,6 +27,7 @@ void paintscene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
             QPen(Qt::black,35,Qt::SolidLine,Qt::RoundCap));
     // Обновляем данные о предыдущей координате
     previousPoint = event->scenePos();
+    VectorFromImage();
 }
 
 auto paintscene::VectorFromImage() -> const std::vector<double>& {
