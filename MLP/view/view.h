@@ -6,6 +6,7 @@
 #include <QTimer>
 #include <QResizeEvent>
 #include "paintscene.h"
+#include <vector>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class view; }
