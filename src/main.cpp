@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "network/network.h"
+#include "matrix_network/matrix_network.h"
 
 int main() {
     s21::MatrixNetwork network;
