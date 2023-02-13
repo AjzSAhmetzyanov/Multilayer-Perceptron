@@ -6,46 +6,22 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1026</width>
-    <height>851</height>
+    <width>1076</width>
+    <height>880</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>view</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QGraphicsView" name="graphicsView">
+   <widget class="render_scene" name="scene" native="true">
     <property name="geometry">
      <rect>
-      <x>510</x>
-      <y>290</y>
-      <width>512</width>
-      <height>512</height>
+      <x>720</x>
+      <y>430</y>
+      <width>351</width>
+      <height>401</height>
      </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>512</width>
-      <height>512</height>
-     </size>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>512</width>
-      <height>512</height>
-     </size>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QGraphicsView {
-    font: 16pt ;
-	font-weight: bold;
-	color: #670F0F;
-	border-style: solid;
-	border-width: 4px 0px 4px 0px;
-	border-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #06153D, stop:1 #81A9E3);
-	background-color: white;
-}
-</string>
     </property>
    </widget>
   </widget>
@@ -54,13 +30,21 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1026</width>
+     <width>1076</width>
      <height>21</height>
     </rect>
    </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>render_scene</class>
+   <extends>QWidget</extends>
+   <header location="global">render_scene.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
