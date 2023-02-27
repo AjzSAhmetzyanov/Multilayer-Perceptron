@@ -4,14 +4,54 @@ namespace s21
 {
 	
 	MatrixNetwork::MatrixNetwork( void ) {
+		srand((unsigned)time(NULL));
+
 		fillSLayer(S_NEURONS_COUNT);
-		fillALayers(A_LAYERS_COUNT, A_LAYERS_COUNT);
+
+		biases.assign(WEIGHTS_COUNT, 0.0);
+
+		// Fill first weight level
 		Weights.reserve(WEIGHTS_COUNT);
-		fillWeights(S_NEURONS_COUNT, A_NEURONS_COUNT);
-		for (int i = 0; i < WEIGHTS_COUNT-2; ++i) {
-			fillWeights(A_NEURONS_COUNT, A_NEURONS_COUNT);
+		std::vector< std::vector< float > > first;
+		for (int i = 0; i < A_NEURONS_COUNT; ++i) {
+			std::vector< float > line;
+			for (int j = 0; j != S_NEURONS_COUNT; ++j) {
+				line.push_back(genRandomFloat());
+			}
+			first.push_back(line);
 		}
-		fillWeights(A_NEURONS_COUNT, R_NEURONS_COUNT);
+		Weights.push_back(first);
+	}
+
+	void MatrixNetwork::MultiplyWeights( const std::vector< float >& prevLayer, int weightInd ) {
+		std::vector< float > tmp;
+		for (int j = 0; j != Weights[weightInd].size(); ++j) {
+			float sum = 0;
+			for (int i = 0; i != prevLayer.size(); ++i) {
+				sum += Weights[weightInd][j][i] * prevLayer[i] + biases[weightInd];
+			}
+			tmp.push_back(sum);
+		}
+
+		for (int i = 0; i != SLayer.size(); ++i) {
+			std::cout << SLayer[i] << " ";
+		}
+		std::cout << std::endl;
+		std::cout << "--------------------------------------------\n";
+
+		for (const auto & weights : Weights[weightInd]) {
+			for (auto elem : weights) {
+				std::cout << elem << " ";
+			}
+			std::cout << std::endl;
+		}
+		std::cout << "--------------------------------------------\n";
+
+		for (int i = 0; i != tmp.size(); ++i) {
+			std::cout << tmp[i] << " ";
+		}
+		std::cout << std::endl;
+
 	}
 
 	std::vector< float > MatrixNetwork::getSLayer( void ) const {
@@ -22,21 +62,21 @@ namespace s21
 		SLayer = newSLayer;
 	}
 
-	std::vector< std::vector< float > > MatrixNetwork::getALayers( void ) const {
-		return ALayers;
-	}
+	// std::vector< std::vector< float > > MatrixNetwork::getALayers( void ) const {
+	// 	return ALayers;
+	// }
 		
-	void MatrixNetwork::setALayers( const std::vector< std::vector< float > >& newALayers) {
-		ALayers = newALayers;
-	}
+	// void MatrixNetwork::setALayers( const std::vector< std::vector< float > >& newALayers) {
+	// 	ALayers = newALayers;
+	// }
 
-	std::vector< std::vector< std::vector< float > > > MatrixNetwork::getWeights( void ) const {
-		return Weights;
-	}	
+	// std::vector< std::vector< float > > MatrixNetwork::getWeights1( void ) const {
+	// 	return Weights1;
+	// }	
 	
-	void MatrixNetwork::setWeights( std::vector< std::vector< std::vector< float > > >&  newWeights) {
-		Weights = newWeights;
-	}
+	// void MatrixNetwork::setWeights1( std::vector< std::vector< float > >&  newWeights) {
+	// 	Weights1 = newWeights;
+	// }
 
 	void MatrixNetwork::fillSLayer( int neuronsCount ) {
 		SLayer.reserve(neuronsCount);
@@ -45,73 +85,73 @@ namespace s21
 		}
 	}
 
-	void MatrixNetwork::fillALayers( int layersCount, int neuronsCount ) {
-		ALayers.reserve(layersCount);
-		for (int l_i = 0; l_i < layersCount; ++l_i) {
-			std::vector<float> vec;
-			vec.reserve(neuronsCount);
+	// void MatrixNetwork::fillALayers( int layersCount, int neuronsCount ) {
+	// 	ALayers.reserve(layersCount);
+	// 	for (int l_i = 0; l_i < layersCount; ++l_i) {
+	// 		std::vector<float> vec;
+	// 		vec.reserve(neuronsCount);
 
-			for (int j = 0; j < neuronsCount; ++j) {
-				vec.push_back(genRandomFloat());
-			}
+	// 		for (int j = 0; j < neuronsCount; ++j) {
+	// 			vec.push_back(genRandomFloat());
+	// 		}
 			
-			ALayers.push_back(vec);
-		}
-	}
+	// 		ALayers.push_back(vec);
+	// 	}
+	// }
 
-	void MatrixNetwork::fillWeights( int prevLayerNeuronsCount, int nextLayerNeuronsCount) {
-		std::vector< std::vector< float > > weights;
-		weights.reserve(prevLayerNeuronsCount);
+	// void MatrixNetwork::fillWeights1( int prevLayerNeuronsCount, int nextLayerNeuronsCount) {
+	// 	std::vector< std::vector< float > > weights;
+	// 	weights.reserve(prevLayerNeuronsCount);
 
-		for (int j = 0; j < prevLayerNeuronsCount; ++j) {
-			std::vector< float > weight;
-			weight.reserve(nextLayerNeuronsCount);
+	// 	for (int j = 0; j < prevLayerNeuronsCount; ++j) {
+	// 		std::vector< float > weight;
+	// 		weight.reserve(nextLayerNeuronsCount);
 
-			for (int k = 0; k < nextLayerNeuronsCount; ++k) {
-				weight.push_back(genRandomFloat());
-			}
+	// 		for (int k = 0; k < nextLayerNeuronsCount; ++k) {
+	// 			weight.push_back(genRandomFloat());
+	// 		}
 
-			weights.push_back(weight);
-		}
+	// 		weights.push_back(weight);
+	// 	}
 
-		Weights.push_back(weights);
-	}
+	// 	Weights1.push_back(weights);
+	// }
 
-	std::ostream& operator<<( std::ostream &out, const MatrixNetwork &obj ) {
-		out << "---------------- S-Layer ----------------" << std::endl;
-		for (float value : obj.getSLayer()) {
-			out << value << ' ';
-		}
-		out << std::endl;
+	// std::ostream& operator<<( std::ostream &out, const MatrixNetwork &obj ) {
+	// 	out << "---------------- S-Layer ----------------" << std::endl;
+	// 	for (float value : obj.getSLayer()) {
+	// 		out << value << ' ';
+	// 	}
+	// 	out << std::endl;
 
-		int i = 1;
-		for (const auto& layer : obj.getALayers()) {
-			out << "---------------- A-Layer-" << i << " ----------------" << std::endl;
+	// 	int i = 1;
+	// 	for (const auto& layer : obj.getALayers()) {
+	// 		out << "---------------- A-Layer-" << i << " ----------------" << std::endl;
 
-			for (float value : layer) {
-				out << value << ' ';
-			}
-			out << std::endl;
+	// 		for (float value : layer) {
+	// 			out << value << ' ';
+	// 		}
+	// 		out << std::endl;
 
-			++i;
-		}
+	// 		++i;
+	// 	}
 
-		i = 1;
-		for (const auto& weight : obj.getWeights()) {
-			out << "---------------- Weight-" << i << " ----------------" << std::endl;
+	// 	i = 1;
+	// 	for (const auto& weight : obj.getWeights()) {
+	// 		out << "---------------- Weight-" << i << " ----------------" << std::endl;
 
-			for (const auto& row : weight) {
-				for (float value : row) {
-					out << value << ' ';
-				}
-				out << std::endl;
-			}
+	// 		for (const auto& row : weight) {
+	// 			for (float value : row) {
+	// 				out << value << ' ';
+	// 			}
+	// 			out << std::endl;
+	// 		}
 
-			++i;
-		}
+	// 		++i;
+	// 	}
 
-		return out;
-	}
+	// 	return out;
+	// }
 
 	float genRandomFloat( void ) {
 		float r = static_cast<float>(rand()) / (static_cast<float>(RAND_MAX));
