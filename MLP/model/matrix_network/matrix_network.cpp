@@ -1,7 +1,6 @@
 #include "matrix_network.h"
 
-namespace s21
-{
+namespace s21 {
 	
 	MatrixNetwork::MatrixNetwork( void ) {
 		fillSLayer(S_NEURONS_COUNT);
@@ -13,6 +12,11 @@ namespace s21
 		}
 		fillWeights(A_NEURONS_COUNT, R_NEURONS_COUNT);
 	}
+    void MatrixNetwork::feed_init_value(const s21::MatrixNetwork::vector_double &values) {
+        for (size_t i = 0; i < values.size(); i++) {
+            this->m_neurons_[0][i][0] = values[i];
+        }
+    }
 
 	std::vector< float > MatrixNetwork::getSLayer( void ) const {
 		return SLayer;
