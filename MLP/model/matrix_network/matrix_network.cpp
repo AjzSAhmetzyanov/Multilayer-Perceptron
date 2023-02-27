@@ -3,15 +3,16 @@
 namespace s21
 {
 	
-	MatrixNetwork::MatrixNetwork( void ) {
+	MatrixNetwork::MatrixNetwork( int weightsCount ) {
 		srand((unsigned)time(NULL));
 
 		fillSLayer(S_NEURONS_COUNT);
 
-		biases.assign(WEIGHTS_COUNT, 0.0);
+		biases.assign(weightsCount, 0.0);
+
+		Weights.reserve(weightsCount);
 
 		// Fill first weight level
-		Weights.reserve(WEIGHTS_COUNT);
 		std::vector< std::vector< float > > first;
 		for (int i = 0; i < A_NEURONS_COUNT; ++i) {
 			std::vector< float > line;
@@ -21,6 +22,55 @@ namespace s21
 			first.push_back(line);
 		}
 		Weights.push_back(first);
+
+		for (int weight_i = 0; weight_i != weightsCount-2; ++weight_i) {
+			std::vector< std::vector< float > > hiddens;
+			for (int i = 0; i < A_NEURONS_COUNT; ++i) {
+				std::vector< float > line;
+				for (int j = 0; j != A_NEURONS_COUNT; ++j) {
+					line.push_back(genRandomFloat());
+				}
+				hiddens.push_back(line);
+			}
+			Weights.push_back(hiddens);
+		}
+
+		std::vector< std::vector< float > > last;
+		for (int i = 0; i < R_NEURONS_COUNT; ++i) {
+			std::vector< float > line;
+			for (int j = 0; j != A_NEURONS_COUNT; ++j) {
+				line.push_back(genRandomFloat());
+			}
+			last.push_back(line);
+		}
+		Weights.push_back(last);
+
+		// std::cout << Weights.size();
+
+		// for (int i = 0; i != Weights[0].size(); ++i) {
+		// 	for (int j = 0; j != Weights[0][i].size(); ++j) {
+		// 		std::cout << Weights[0][i][j] << " ";
+		// 	}
+		// 	std::cout << std::endl;
+		// }
+
+		// for (int w = 1; w != Weights.size()-1; ++w) {
+		// 	std::cout << "ALayer-" << w << std::endl;
+		// 	for (int i = 0; i != Weights[w].size(); ++i) {
+		// 		for (int j = 0; j != Weights[w][i].size(); ++j) {
+		// 			std::cout << Weights[0][i][j] << " ";
+		// 		}
+		// 		std::cout << std::endl;
+		// 	}
+		// 	std::cout << "-------------------------------------\n";
+		// }
+
+		// for (int i = 0; i != Weights[Weights.size()-1].size(); ++i) {
+		// 	for (int j = 0; j != Weights[Weights.size()-1][i].size(); ++j) {
+		// 		std::cout << Weights[Weights.size()-1][i][j] << " ";
+		// 	}
+		// 	std::cout << std::endl;
+		// }
 	}
 
 	void MatrixNetwork::MultiplyWeights( const std::vector< float >& prevLayer, int weightInd ) {
@@ -30,27 +80,32 @@ namespace s21
 			for (int i = 0; i != prevLayer.size(); ++i) {
 				sum += Weights[weightInd][j][i] * prevLayer[i] + biases[weightInd];
 			}
-			tmp.push_back(sum);
+			tmp.push_back(ActivateFunction::use(sum, 1));
+		}
+		if (weightInd < Weights.size()-1) {
+			ALayers.push_back(tmp);
 		}
 
-		for (int i = 0; i != SLayer.size(); ++i) {
-			std::cout << SLayer[i] << " ";
-		}
-		std::cout << std::endl;
-		std::cout << "--------------------------------------------\n";
+		// for (int i = 0; i != prevLayer.size(); ++i) {
+		// 	std::cout << prevLayer[i] << " ";
+		// }
+		// std::cout << std::endl;
+		// std::cout << "--------------------------------------------\n";
 
-		for (const auto & weights : Weights[weightInd]) {
-			for (auto elem : weights) {
-				std::cout << elem << " ";
-			}
-			std::cout << std::endl;
-		}
-		std::cout << "--------------------------------------------\n";
+		// for (const auto & weights : Weights[weightInd]) {
+		// 	for (auto elem : weights) {
+		// 		std::cout << elem << " ";
+		// 	}
+		// 	std::cout << std::endl;
+		// }
+		// std::cout << "--------------------------------------------\n";
 
-		for (int i = 0; i != tmp.size(); ++i) {
-			std::cout << tmp[i] << " ";
-		}
-		std::cout << std::endl;
+		// for (int i = 0; i != tmp.size(); ++i) {
+		// 	std::cout << tmp[i] << " ";
+		// }
+		// std::cout << std::endl;
+
+		// std::cout << "___________________________________________________________________________\n";
 
 	}
 
@@ -62,13 +117,21 @@ namespace s21
 		SLayer = newSLayer;
 	}
 
-	// std::vector< std::vector< float > > MatrixNetwork::getALayers( void ) const {
-	// 	return ALayers;
-	// }
+	std::vector< float > MatrixNetwork::getRLayer( void ) const {
+		return RLayer;
+	}
+
+	void MatrixNetwork::setRLayer( const std::vector< float >& newRLayer ) {
+		RLayer = newRLayer;
+	}
+
+	std::vector< std::vector< float > > MatrixNetwork::getALayers( void ) const {
+		return ALayers;
+	}
 		
-	// void MatrixNetwork::setALayers( const std::vector< std::vector< float > >& newALayers) {
-	// 	ALayers = newALayers;
-	// }
+	void MatrixNetwork::setALayers( const std::vector< std::vector< float > >& newALayers) {
+		ALayers = newALayers;
+	}
 
 	// std::vector< std::vector< float > > MatrixNetwork::getWeights1( void ) const {
 	// 	return Weights1;

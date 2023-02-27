@@ -4,13 +4,15 @@
 # include <vector>
 # include <iostream>
 # include <random>
+# include "../acivate_funcs/activate_func.h"
 
 
 # define S_NEURONS_COUNT 10
 # define A_NEURONS_COUNT 4
-// # define R_NEURONS_COUNT 26
+# define R_NEURONS_COUNT 26
 // # define A_LAYERS_COUNT 5
-# define WEIGHTS_COUNT 6
+// # define WEIGHTS_COUNT 6
+
 
 namespace s21
 {
@@ -18,7 +20,8 @@ namespace s21
 	class MatrixNetwork {
 	private:
 		std::vector< float > SLayer;
-		std::vector< float > ALayer1;
+		std::vector< std::vector< float > > ALayers;
+		std::vector< float > RLayer;
 		std::vector< std::vector< std::vector< float > > > Weights;
 		std::vector< float > biases;
 
@@ -27,13 +30,16 @@ namespace s21
 		void fillWeights( int, int );
 
 	public:
-		MatrixNetwork( void );
+		MatrixNetwork( int );
 
 		std::vector< float > getSLayer( void ) const;
 		void setSLayer( const std::vector< float >& );
 
-		// std::vector< std::vector< float > > getALayers( void ) const;
-		// void setALayers( const std::vector< std::vector< float > >& );
+		std::vector< float > getRLayer( void ) const;
+		void setRLayer( const std::vector< float >& );
+
+		std::vector< std::vector< float > > getALayers( void ) const;
+		void setALayers( const std::vector< std::vector< float > >& );
 
 		std::vector< std::vector< float > > getWeights1( void ) const;
 		void setWeights( std::vector< std::vector< std::vector< float > > >& );
