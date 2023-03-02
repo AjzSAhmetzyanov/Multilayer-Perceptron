@@ -23,7 +23,7 @@ namespace s21
     //     }
     // }
 
-    float ActivateFunction::use(float x, int num) {
+    double ActivateFunction::use(double x, int num) {
         switch (num) {
             case activateFunc::sigmoid:
                 // for (int i = 0; i < n; i++)
@@ -52,7 +52,7 @@ namespace s21
         return x;
     }
 
-     float ActivateFunction::useDer(float x, int num) {
+    double ActivateFunction::useDer(double x, int num) {
          switch(num) {
              case activateFunc::sigmoid:
                  x = x * (1 - x);

@@ -22,55 +22,74 @@ int main(){
     } else
         std::cout<<"Could not open the file\n";
 
-    std::vector<float> train_1 = {};
+    std::vector<double> train_1 = {};
     for(int j=1;j<content[0].size();j++) {
             train_1.push_back(stod(content[0][j])/255);
         }
 //    for(auto i : train_1) {
 //        std::cout<<i<<std::endl;
 //    }
-    s21::MatrixNetwork matr(6, train_1);
+    s21::MatrixNetwork matr(5, train_1);
     matr.MultiplyWeights(matr.getSLayer(), 0);
     matr.MultiplyWeights(matr.getALayers()[0], 1);
     matr.MultiplyWeights(matr.getALayers()[1], 2);
     matr.MultiplyWeights(matr.getALayers()[2], 3);
     matr.MultiplyWeights(matr.getALayers()[3], 4);
-    matr.MultiplyWeights(matr.getALayers()[4], 5);
+//    matr.MultiplyWeights(matr.getALayers()[4], 5);
 
+
+//    for (const auto row : matr.getALayers()) {
+//        for (float elem : row)
+//            std::cout << elem << " ";
+//        std::cout << std::endl;
+//    }
+//
     auto weights = matr.getWeights();
 
+//        for (const auto & iter : matr.getRLayer()) {
+//            std::cout << iter << std::endl;
+//        }
 
+//    std::cout << "\n--------------------------------------------------------------------------\n";
+//
+//        for (const auto & iter : weights[0]) {
+//            for (auto i : iter) {
+//                std::cout << i << " ";
+//            }
+//            std::cout << std::endl;
+//        }
 
-//    for (const auto& weight : ) {
-        for (const auto& govno : weights[weights.size()-1]) {
-            for (float elem : govno) {
-                std::cout << elem << " ";
-            }
-            std::cout << std::endl;
+//    std::cout << "\n--------------------------------------------------------------------------\n";
+//
+        for (const auto & iter : matr.getRLayer()) {
+            std::cout << iter << std::endl;
         }
+//
+//    std::cout << "\n--------------------------------------------------------------------------\n";
 
-//    }
+//    for (auto & iter : matr.ComputeDelta(stoi(content[0][0])))
+//        std::cout << iter << std::endl;
 
-    std::cout << "\n--------------------------------------------------------------------------\n";
-
+//    std::cout << "\n--------------------------------------------------------------------------\n";
+//
     for (auto i : matr.ComputeDelta(stoi(content[0][0])))
         std::cout << i << ' ';
-    std::cout << "\n--------------------------------------------------------------------------\n";
-
-    for (int i = 0; i != matr.getALayers()[matr.getALayers().size()-1].size(); ++i) {
-        std::cout << matr.getALayers()[matr.getALayers().size()-1][i] << " ";
-    }
-    std::cout << "\n--------------------------------------------------------------------------\n";
-
-    weights = matr.getWeights();
-
-    for (const auto& iter : weights[weights.size()-1]) {
-        for (float elem : iter) {
-            std::cout << elem << " ";
-        }
-        std::cout << std::endl;
-    }
-    std::cout << "\n--------------------------------------------------------------------------\n";
+//    std::cout << "\n--------------------------------------------------------------------------\n";
+//
+//    for (int i = 0; i != matr.getALayers()[matr.getALayers().size()-1].size(); ++i) {
+//        std::cout << matr.getALayers()[matr.getALayers().size()-1][i] << " ";
+//    }
+//    std::cout << "\n--------------------------------------------------------------------------\n";
+//
+//    weights = matr.getWeights();
+//
+//    for (const auto& iter : weights[weights.size()-1]) {
+//        for (float elem : iter) {
+//            std::cout << elem << " ";
+//        }
+//        std::cout << std::endl;
+//    }
+//    std::cout << "\n--------------------------------------------------------------------------\n";
 
     return 0;
 }

@@ -11,8 +11,8 @@ namespace s21
     public:
         static activateFunc actFunc;
         static void set();
-        static float use(float, int);
-        static float useDer(float, int);
+        static double use(double, int);
+        static double useDer(double, int);
     };
 
 } // namespace s21

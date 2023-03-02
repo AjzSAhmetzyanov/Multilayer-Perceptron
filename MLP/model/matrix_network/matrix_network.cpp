@@ -2,56 +2,55 @@
 
 namespace s21 {
 	
-	MatrixNetwork::MatrixNetwork( int weightsCount, std::vector<float>& Slayer_input) {
+	MatrixNetwork::MatrixNetwork( int weightsCount, std::vector<double>& Slayer_input) {
         srand((unsigned)time(NULL));
 
 		SLayer = Slayer_input;
 
-		biases.assign(weightsCount, 1);
-
 		Weights.reserve(weightsCount);
 
 		// Fill first weight level
-		std::vector< std::vector< float > > first;
+		std::vector< std::vector< double > > first;
 		for (int i = 0; i < A_NEURONS_COUNT; ++i) {
-			std::vector< float > line;
+			std::vector< double > line;
 			for (int j = 0; j != S_NEURONS_COUNT; ++j) {
-				line.push_back(genRandomFloat());
+				line.push_back(genRandomFloat(-1.0, 1.0));
 			}
 			first.push_back(line);
 		}
 		Weights.push_back(first);
 
 		for (int weight_i = 0; weight_i != weightsCount-2; ++weight_i) {
-			std::vector< std::vector< float > > hiddens;
+			std::vector< std::vector< double > > hiddens;
 			for (int i = 0; i < A_NEURONS_COUNT; ++i) {
-				std::vector< float > line;
+				std::vector< double > line;
 				for (int j = 0; j != A_NEURONS_COUNT; ++j) {
-					line.push_back(genRandomFloat());
+					line.push_back(genRandomFloat(-1.0, 1.0));
 				}
 				hiddens.push_back(line);
 			}
 			Weights.push_back(hiddens);
 		}
 
-		std::vector< std::vector< float > > last;
+		std::vector< std::vector< double > > last;
 		for (int i = 0; i < R_NEURONS_COUNT; ++i) {
-			std::vector< float > line;
+			std::vector< double > line;
 			for (int j = 0; j != A_NEURONS_COUNT; ++j) {
-				line.push_back(genRandomFloat());
+				line.push_back(genRandomFloat(-1.0, 1.0));
 			}
 			last.push_back(line);
 		}
 		Weights.push_back(last);
 	}
 
-	void MatrixNetwork::MultiplyWeights( const std::vector< float >& prevLayer, int weightInd ) {
-		std::vector< float > tmp;
+	void MatrixNetwork::MultiplyWeights( const std::vector< double >& prevLayer, int weightInd ) {
+		std::vector< double > tmp;
 		for (int j = 0; j != Weights[weightInd].size(); ++j) {
-			float sum = 0;
+            double sum = 1;
 			for (int i = 0; i != prevLayer.size(); ++i) {
-				sum += Weights[weightInd][j][i] * prevLayer[i] + biases[weightInd];
+				sum += Weights[weightInd][j][i] * prevLayer[i];
 			}
+//            std::cout << ' ' << std::endl;
 			tmp.push_back(ActivateFunction::use(sum, 1));
 		}
 		if (weightInd < Weights.size()-1) {
@@ -61,8 +60,8 @@ namespace s21 {
         }
 	}
 
-    std::vector<float> MatrixNetwork::solve_errors(int prediction) {
-        std::vector<float> errors;
+    std::vector<double> MatrixNetwork::solve_errors(int prediction) {
+        std::vector<double> errors;
         for (int i = 0; i < R_NEURONS_COUNT; i++) {
             if (prediction-1 == i) {
                 errors.push_back(1 - RLayer[i]);
@@ -73,21 +72,21 @@ namespace s21 {
         return errors;
     }
 
-    std::vector< float > MatrixNetwork::ComputeDelta(int prediction) {
-        std::vector< float > delta;
+    std::vector< double > MatrixNetwork::ComputeDelta(int prediction) {
+        std::vector< double > delta;
         auto errorsLast = solve_errors(prediction);
 
         for (int i = 0; i != errorsLast.size(); ++i) {
-            delta.push_back(abs(ActivateFunction::useDer(RLayer[i], 1) * errorsLast[i]));
+            delta.push_back(ActivateFunction::useDer(RLayer[i], 1) * errorsLast[i]);
         }
 
-        float learningRate = 0.1;
-        for (int i = 0; i != Weights[Weights.size()-1].size(); ++i) {
-            for (int j = 0; j != Weights[Weights.size()-1][i].size(); ++j) {
-                Weights[Weights.size()-1][i][j] =
-                abs(Weights[Weights.size()-1][i][j] - ALayers[ALayers.size()-1][j] * delta[i] * learningRate);
-            }
-        }
+//        float learningRate = 0.1;
+//        for (int i = 0; i != Weights[Weights.size()-1].size(); ++i) {
+//            for (int j = 0; j != Weights[Weights.size()-1][i].size(); ++j) {
+//                Weights[Weights.size()-1][i][j] =
+//                abs(Weights[Weights.size()-1][i][j] - ALayers[ALayers.size()-1][j] * delta[i] * learningRate);
+//            }
+//        }
 
 //        std::vector< float > errors;
 //        for
@@ -99,42 +98,42 @@ namespace s21 {
 //    void MatrixNetwork::CorrectRWeights( void ) {
 //    }
 
-    std::vector< float > MatrixNetwork::getSLayer( void ) const {
+    std::vector< double > MatrixNetwork::getSLayer( void ) const {
         return SLayer;
     }
 
-	void MatrixNetwork::setSLayer( const std::vector< float >& newSLayer ) {
+	void MatrixNetwork::setSLayer( const std::vector< double >& newSLayer ) {
 		SLayer = newSLayer;
 	}
 
-	std::vector< float > MatrixNetwork::getRLayer( void ) const {
+	std::vector< double > MatrixNetwork::getRLayer( void ) const {
 		return RLayer;
 	}
 
-	void MatrixNetwork::setRLayer( const std::vector< float >& newRLayer ) {
+	void MatrixNetwork::setRLayer( const std::vector< double >& newRLayer ) {
 		RLayer = newRLayer;
 	}
 
-	std::vector< std::vector< float > > MatrixNetwork::getALayers( void ) const {
+	std::vector< std::vector< double > > MatrixNetwork::getALayers( void ) const {
 		return ALayers;
 	}
 		
-	void MatrixNetwork::setALayers( const std::vector< std::vector< float > >& newALayers) {
+	void MatrixNetwork::setALayers( const std::vector< std::vector< double > >& newALayers) {
 		ALayers = newALayers;
 	}
 
-	 std::vector< std::vector< std::vector< float > > > MatrixNetwork::getWeights( void ) const {
+	 std::vector< std::vector< std::vector< double > > > MatrixNetwork::getWeights( void ) const {
 	 	return Weights;
 	 }
 	
-	 void MatrixNetwork::setWeights( std::vector< std::vector< std::vector< float > > >&  newWeights) {
+	 void MatrixNetwork::setWeights( std::vector< std::vector< std::vector< double > > >&  newWeights) {
 	 	Weights = newWeights;
 	 }
 
 	void MatrixNetwork::fillSLayer( int neuronsCount ) {
 		SLayer.reserve(neuronsCount);
 		for (int i = 0; i < neuronsCount; ++i) {	
-			SLayer.push_back(genRandomFloat());
+			SLayer.push_back(genRandomFloat(-1,1));
 		}
 	}
 
@@ -206,9 +205,15 @@ namespace s21 {
 	// 	return out;
 	// }
 
-	float genRandomFloat( void ) {
-		float r = static_cast<float>(rand()) / (static_cast<float>(RAND_MAX));
-		return (int)(100 * r) / 100.0;
-	}
+    double genRandomFloat( double min, double max ) {
+//        double r = static_cast<double>(rand()) / (static_cast<double>(RAND_MAX));
+        double value;
+        value = rand() % (int)pow(10, 4);
+
+        // получить вещественное число
+        value = min + (value / pow(10, 4)) * (max - min);
+        return value;
+    }
 
 } // namespace s21
+
