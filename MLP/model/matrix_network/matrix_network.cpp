@@ -62,6 +62,7 @@ namespace s21 {
 
     std::vector<double> MatrixNetwork::solve_errors(int prediction) {
         std::vector<double> errors;
+        double system_errors = 0;
         for (int i = 0; i < R_NEURONS_COUNT; i++) {
             if (prediction-1 == i) {
                 errors.push_back(1 - RLayer[i]);
@@ -69,34 +70,79 @@ namespace s21 {
                 errors.push_back(0 - RLayer[i]);
             }
         }
-        return errors;
+
+        for (int i = 0; i < R_NEURONS_COUNT; i++) {
+            system_errors += (errors[i] * errors[i]);
+        }
+        std::cout << system_errors << std::endl;
+            return errors;
     }
 
     std::vector< double > MatrixNetwork::ComputeDelta(int prediction) {
-        std::vector< double > delta;
+        std::vector< double > delta_r;
+        std::vector< double > delta_l_last;
+        std::vector< double > delta_h_last;
         auto errorsLast = solve_errors(prediction);
 
         for (int i = 0; i != errorsLast.size(); ++i) {
-            delta.push_back(ActivateFunction::useDer(RLayer[i], 1) * errorsLast[i]);
+            delta_r.push_back(ActivateFunction::useDer(RLayer[i], 1) * errorsLast[i]);
         }
 
-//        float learningRate = 0.1;
-//        for (int i = 0; i != Weights[Weights.size()-1].size(); ++i) {
-//            for (int j = 0; j != Weights[Weights.size()-1][i].size(); ++j) {
-//                Weights[Weights.size()-1][i][j] =
-//                abs(Weights[Weights.size()-1][i][j] - ALayers[ALayers.size()-1][j] * delta[i] * learningRate);
-//            }
+
+        for (int i = 0; i != A_NEURONS_COUNT-1; ++i) {
+            double sum = 0;
+            for (int j = 0; j != R_NEURONS_COUNT; ++j) {
+                    sum += delta_r[j] * Weights[Weights.size() - 1][j][i];
+                    }
+                delta_l_last.push_back(sum);
+            }
+
+//        for (auto & i : delta_l_last) {
+//            std::cout << i << std::endl;
 //        }
+    for (const auto & iter : Weights[1]) {
+        for (auto i : iter) {
+            std::cout << i << " ";
+        }
+        std::cout << std::endl;
+    }
+        std::cout << "\n--------------------------------------------------------------------------\n";
 
-//        std::vector< float > errors;
-//        for
+        float learningRate = 0.15;
+        for (int i = 0; i != R_NEURONS_COUNT; ++i) {
+            for (int j = 0; j != A_NEURONS_COUNT; ++j) {
+                Weights[Weights.size()-1][i][j] =
+                Weights[Weights.size()-1][i][j] - ALayers[ALayers.size()-1][i] * delta_l_last[i] * learningRate;
+            }
+        }
+
+        for (int i = 0; i != A_NEURONS_COUNT-1; ++i) {
+            double sum = 0;
+            for (int j = 0; j != A_NEURONS_COUNT; ++j) {
+                sum += delta_l_last[j] * Weights[Weights.size() - 2][j][i];
+            }
+            delta_h_last.push_back(sum);
+        }
+        for (int i = 0; i != A_NEURONS_COUNT; ++i) {
+            for (int j = 0; j != A_NEURONS_COUNT; ++j) {
+                Weights[Weights.size()-2][i][j] =
+                        Weights[Weights.size()-2][i][j] - ALayers[ALayers.size()-2][i] * delta_l_last[i] * learningRate;
+            }
+        }
+//
+    for (const auto & iter : Weights[1]) {
+        for (auto i : iter) {
+            std::cout << i << " ";
+        }
+        std::cout << std::endl;
+    }
+//
+//        std::cout << "----------------------------" << std::endl;
+//        for ()
 
 
-        return delta;
+        return delta_r;
 	}
-
-//    void MatrixNetwork::CorrectRWeights( void ) {
-//    }
 
     std::vector< double > MatrixNetwork::getSLayer( void ) const {
         return SLayer;
@@ -208,10 +254,10 @@ namespace s21 {
     double genRandomFloat( double min, double max ) {
 //        double r = static_cast<double>(rand()) / (static_cast<double>(RAND_MAX));
         double value;
-        value = rand() % (int)pow(10, 4);
+        value = rand() % (int)pow(10, 3);
 
         // получить вещественное число
-        value = min + (value / pow(10, 4)) * (max - min);
+        value = min + (value / pow(10, 3)) * (max - min);
         return value;
     }
 
