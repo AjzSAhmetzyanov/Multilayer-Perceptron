@@ -44,7 +44,7 @@ int main(){
     auto weight = matr.getWeights();
 
 //    for (const auto row : matr.getALayers()[3]) {
-////        for (float elem : row)
+//        for (float elem : row)
 //            std::cout << row << " ";
 //        std::cout << std::endl;
 //    }
@@ -76,16 +76,24 @@ int main(){
 //        }
 
 //    std::cout << "\n--------------------------------------------------------------------------\n";
-//
-//        for (const auto & iter : weights[0]) {
-//            for (auto i : iter) {
-//                std::cout << i << " ";
-//            }
-//            std::cout << std::endl;
-//        }
 
-//    std::cout << "\n--------------------------------------------------------------------------\n";
-//
+        for (const auto & iter : weights[0]) {
+            for (auto i : iter) {
+                std::cout << i << " ";
+            }
+            std::cout << std::endl;
+        }
+
+    std::cout << "\n--------------------------------------------------------------------------\n";
+
+        auto weight_ = matr.getWeights();
+        for (const auto & iter : weight_[0]) {
+            for (auto i : iter) {
+                std::cout << i << " ";
+            }
+            std::cout << std::endl;
+        }
+
 //        for (const auto & iter : matr.getRLayer()) {
 //            std::cout << iter << std::endl;
 //        }

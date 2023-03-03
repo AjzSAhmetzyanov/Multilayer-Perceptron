@@ -74,7 +74,7 @@ namespace s21 {
         for (int i = 0; i < R_NEURONS_COUNT; i++) {
             system_errors += (errors[i] * errors[i]);
         }
-        std::cout << system_errors << std::endl;
+//        std::cout << system_errors << std::endl;
             return errors;
     }
 
@@ -88,8 +88,7 @@ namespace s21 {
             delta_r.push_back(ActivateFunction::useDer(RLayer[i], 1) * errorsLast[i]);
         }
 
-
-        for (int i = 0; i != A_NEURONS_COUNT-1; ++i) {
+        for (int i = 0; i != A_NEURONS_COUNT; ++i) {
             double sum = 0;
             for (int j = 0; j != R_NEURONS_COUNT; ++j) {
                     sum += delta_r[j] * Weights[Weights.size() - 1][j][i];
@@ -97,50 +96,76 @@ namespace s21 {
                 delta_l_last.push_back(sum);
             }
 
-//        for (auto & i : delta_l_last) {
-//            std::cout << i << std::endl;
-//        }
-    for (const auto & iter : Weights[1]) {
-        for (auto i : iter) {
-            std::cout << i << " ";
+        for (int i = 0; i != A_NEURONS_COUNT; ++i) {
+                delta_h_last.push_back(delta_l_last[i]*ActivateFunction::useDer(ALayers[ALayers.size()-1][i], 1));
         }
-        std::cout << std::endl;
-    }
-        std::cout << "\n--------------------------------------------------------------------------\n";
 
         float learningRate = 0.15;
         for (int i = 0; i != R_NEURONS_COUNT; ++i) {
             for (int j = 0; j != A_NEURONS_COUNT; ++j) {
                 Weights[Weights.size()-1][i][j] =
-                Weights[Weights.size()-1][i][j] - ALayers[ALayers.size()-1][i] * delta_l_last[i] * learningRate;
+                Weights[Weights.size()-1][i][j] - ALayers[ALayers.size()-1][i] * delta_h_last[i] * learningRate;
             }
-        }
+        } //ok
 
-        for (int i = 0; i != A_NEURONS_COUNT-1; ++i) {
+        std::vector< double > delta_h_c_p;
+        for (int i = 0; i != A_NEURONS_COUNT; ++i) {
             double sum = 0;
             for (int j = 0; j != A_NEURONS_COUNT; ++j) {
-                sum += delta_l_last[j] * Weights[Weights.size() - 2][j][i];
+                sum += delta_h_last[j] * Weights[Weights.size() - 2][j][i];
             }
-            delta_h_last.push_back(sum);
+            delta_h_c_p.push_back(sum);
         }
+
+        std::vector< double > delta_h_p;
+        for (int i = 0; i != A_NEURONS_COUNT; ++i) {
+            delta_h_p.push_back(delta_l_last[i]*ActivateFunction::useDer(ALayers[ALayers.size()-2][i], 1));
+        }
+
         for (int i = 0; i != A_NEURONS_COUNT; ++i) {
             for (int j = 0; j != A_NEURONS_COUNT; ++j) {
                 Weights[Weights.size()-2][i][j] =
-                        Weights[Weights.size()-2][i][j] - ALayers[ALayers.size()-2][i] * delta_l_last[i] * learningRate;
+                        Weights[Weights.size()-2][i][j] - ALayers[ALayers.size()-2][i] * delta_h_p[i] * learningRate;
             }
-        }
-//
-    for (const auto & iter : Weights[1]) {
-        for (auto i : iter) {
-            std::cout << i << " ";
-        }
-        std::cout << std::endl;
-    }
-//
-//        std::cout << "----------------------------" << std::endl;
-//        for ()
+        } //ok
 
+        for (int i = 0; i != A_NEURONS_COUNT; ++i) {
+            double sum = 0;
+            for (int j = 0; j != A_NEURONS_COUNT; ++j) {
+                sum += delta_h_p[j] * Weights[Weights.size() - 3][j][i];
+            }
+            delta_h_c_p.push_back(sum);
+        }
 
+        for (int i = 0; i != A_NEURONS_COUNT; ++i) {
+            delta_h_p.push_back(delta_h_c_p[i]*ActivateFunction::useDer(ALayers[ALayers.size()-3][i], 1));
+        }
+
+        for (int i = 0; i != A_NEURONS_COUNT; ++i) {
+            for (int j = 0; j != A_NEURONS_COUNT; ++j) {
+                Weights[Weights.size()-3][i][j] =
+                        Weights[Weights.size()-3][i][j] - ALayers[ALayers.size()-3][i] * delta_h_p[i] * learningRate;
+            }
+        } //ok
+
+        for (int i = 0; i != S_NEURONS_COUNT; ++i) {
+            double sum = 0;
+            for (int j = 0; j != A_NEURONS_COUNT; ++j) {
+                sum += delta_h_p[j] * Weights[Weights.size() - 4][j][i];
+            }
+            delta_h_c_p.push_back(sum);
+        }
+
+        for (int i = 0; i != S_NEURONS_COUNT; ++i) {
+            delta_h_p.push_back(delta_h_c_p[i]*ActivateFunction::useDer(SLayer[i], 1));
+        }
+
+        for (int i = 0; i != A_NEURONS_COUNT; ++i) {
+            for (int j = 0; j != S_NEURONS_COUNT; ++j) {
+                Weights[Weights.size()-4][i][j] =
+                        Weights[Weights.size()-4][i][j] - SLayer[i] * delta_h_p[i] * learningRate;
+            }
+        } //ok
         return delta_r;
 	}
 
