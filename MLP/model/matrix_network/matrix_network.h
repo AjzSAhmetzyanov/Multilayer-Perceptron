@@ -6,6 +6,7 @@
 # include <random>
 # include <cmath>
 #include <time.h>
+#include <algorithm>
 
 # include "../acivate_funcs/activate_func.h"
 

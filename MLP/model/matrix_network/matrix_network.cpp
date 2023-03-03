@@ -1,8 +1,7 @@
 #include "matrix_network.h"
 
 namespace s21 {
-	
-	MatrixNetwork::MatrixNetwork( int weightsCount, std::vector<double>& Slayer_input) {
+    MatrixNetwork::MatrixNetwork( int weightsCount, std::vector<double>& Slayer_input) {
         srand((unsigned)time(NULL));
 
 		SLayer = Slayer_input;
@@ -62,19 +61,21 @@ namespace s21 {
 
     std::vector<double> MatrixNetwork::solve_errors(int prediction) {
         std::vector<double> errors;
-        double system_errors = 0;
+        std::vector<double> system_errors;
         for (int i = 0; i < R_NEURONS_COUNT; i++) {
             if (prediction-1 == i) {
-                errors.push_back(1 - RLayer[i]);
+                errors.push_back((1 - RLayer[i])*(1 - RLayer[i]));
             } else {
-                errors.push_back(0 - RLayer[i]);
+                errors.push_back((0 - RLayer[i])*(0 - RLayer[i]));
             }
         }
-
         for (int i = 0; i < R_NEURONS_COUNT; i++) {
-            system_errors += (errors[i] * errors[i]);
+            system_errors.push_back(errors[i] * errors[i]);
         }
-        std::cout << system_errors << std::endl;
+        for (auto & i : errors)
+            std::cout << i << std::endl;
+        std::cout << std::max_element(system_errors.begin(), system_errors.end()) - system_errors.begin();
+        std::cout << "......................."<<std::endl;
             return errors;
     }
 
@@ -82,23 +83,30 @@ namespace s21 {
         std::vector< double > delta_r;
         std::vector< double > delta_l_last;
         std::vector< double > delta_h_last;
+        std::vector< double > temp;
         auto errorsLast = solve_errors(prediction);
 
         for (int i = 0; i != errorsLast.size(); ++i) {
-            delta_r.push_back(ActivateFunction::useDer(RLayer[i], 1) * errorsLast[i]);
+            temp.push_back(ActivateFunction::useDer(RLayer[i], 1) * errorsLast[i]);
         }
+        delta_r = temp;
+        temp.clear();
 
         for (int i = 0; i != A_NEURONS_COUNT; ++i) {
             double sum = 0;
             for (int j = 0; j != R_NEURONS_COUNT; ++j) {
                     sum += delta_r[j] * Weights[Weights.size() - 1][j][i];
                     }
-                delta_l_last.push_back(sum);
+                temp.push_back(sum);
             }
+        delta_l_last = temp;
+        temp.clear();
 
         for (int i = 0; i != A_NEURONS_COUNT; ++i) {
-                delta_h_last.push_back(delta_l_last[i]*ActivateFunction::useDer(ALayers[ALayers.size()-1][i], 1));
+                temp.push_back(delta_l_last[i]*ActivateFunction::useDer(ALayers[ALayers.size()-1][i], 1));
         }
+        delta_h_last = temp;
+        temp.clear();
 
         float learningRate = 0.15;
         for (int i = 0; i != R_NEURONS_COUNT; ++i) {
@@ -114,13 +122,17 @@ namespace s21 {
             for (int j = 0; j != A_NEURONS_COUNT; ++j) {
                 sum += delta_h_last[j] * Weights[Weights.size() - 2][j][i];
             }
-            delta_h_c_p.push_back(sum);
+            temp.push_back(sum);
         }
+        delta_h_c_p = temp;
+        temp.clear();
 
         std::vector< double > delta_h_p;
         for (int i = 0; i != A_NEURONS_COUNT; ++i) {
-            delta_h_p.push_back(delta_l_last[i]*ActivateFunction::useDer(ALayers[ALayers.size()-2][i], 1));
+            temp.push_back(delta_l_last[i]*ActivateFunction::useDer(ALayers[ALayers.size()-2][i], 1));
         }
+        delta_h_p = temp;
+        temp.clear();
 
         for (int i = 0; i != A_NEURONS_COUNT; ++i) {
             for (int j = 0; j != A_NEURONS_COUNT; ++j) {
@@ -134,12 +146,16 @@ namespace s21 {
             for (int j = 0; j != A_NEURONS_COUNT; ++j) {
                 sum += delta_h_p[j] * Weights[Weights.size() - 3][j][i];
             }
-            delta_h_c_p.push_back(sum);
+            temp.push_back(sum);
+            delta_h_c_p = temp;
+            temp.clear();
         }
 
         for (int i = 0; i != A_NEURONS_COUNT; ++i) {
-            delta_h_p.push_back(delta_h_c_p[i]*ActivateFunction::useDer(ALayers[ALayers.size()-3][i], 1));
+            temp.push_back(delta_h_c_p[i]*ActivateFunction::useDer(ALayers[ALayers.size()-3][i], 1));
         }
+        delta_h_p = temp;
+        temp.clear();
 
         for (int i = 0; i != A_NEURONS_COUNT; ++i) {
             for (int j = 0; j != A_NEURONS_COUNT; ++j) {
@@ -153,17 +169,21 @@ namespace s21 {
             for (int j = 0; j != A_NEURONS_COUNT; ++j) {
                 sum += delta_h_p[j] * Weights[Weights.size() - 4][j][i];
             }
-            delta_h_c_p.push_back(sum);
+            temp.push_back(sum);
+            delta_h_c_p = temp;
+            temp.clear();
         }
 
         for (int i = 0; i != S_NEURONS_COUNT; ++i) {
-            delta_h_p.push_back(delta_h_c_p[i]*ActivateFunction::useDer(SLayer[i], 1));
+            temp.push_back(delta_h_c_p[i]*ActivateFunction::useDer(SLayer[i], 1));
         }
+        delta_h_p = temp;
+        temp.clear();
 
-        for (int i = 0; i != A_NEURONS_COUNT; ++i) {
-            for (int j = 0; j != S_NEURONS_COUNT; ++j) {
-                Weights[Weights.size()-4][i][j] =
-                        Weights[Weights.size()-4][i][j] - SLayer[i] * delta_h_p[i] * learningRate;
+        for (int i = 0; i != S_NEURONS_COUNT; ++i) {
+            for (int j = 0; j != A_NEURONS_COUNT; ++j) {
+                Weights[Weights.size()-4][j][i] =
+                        Weights[Weights.size()-4][j][i] - SLayer[i] * delta_h_p[i] * learningRate;
             }
         } //ok
         return delta_r;
@@ -208,83 +228,13 @@ namespace s21 {
 		}
 	}
 
-	// void MatrixNetwork::fillALayers( int layersCount, int neuronsCount ) {
-	// 	ALayers.reserve(layersCount);
-	// 	for (int l_i = 0; l_i < layersCount; ++l_i) {
-	// 		std::vector<float> vec;
-	// 		vec.reserve(neuronsCount);
-
-	// 		for (int j = 0; j < neuronsCount; ++j) {
-	// 			vec.push_back(genRandomFloat());
-	// 		}
-			
-	// 		ALayers.push_back(vec);
-	// 	}
-	// }
-
-	// void MatrixNetwork::fillWeights1( int prevLayerNeuronsCount, int nextLayerNeuronsCount) {
-	// 	std::vector< std::vector< float > > weights;
-	// 	weights.reserve(prevLayerNeuronsCount);
-
-	// 	for (int j = 0; j < prevLayerNeuronsCount; ++j) {
-	// 		std::vector< float > weight;
-	// 		weight.reserve(nextLayerNeuronsCount);
-
-	// 		for (int k = 0; k < nextLayerNeuronsCount; ++k) {
-	// 			weight.push_back(genRandomFloat());
-	// 		}
-
-	// 		weights.push_back(weight);
-	// 	}
-
-	// 	Weights1.push_back(weights);
-	// }
-
-	// std::ostream& operator<<( std::ostream &out, const MatrixNetwork &obj ) {
-	// 	out << "---------------- S-Layer ----------------" << std::endl;
-	// 	for (float value : obj.getSLayer()) {
-	// 		out << value << ' ';
-	// 	}
-	// 	out << std::endl;
-
-	// 	int i = 1;
-	// 	for (const auto& layer : obj.getALayers()) {
-	// 		out << "---------------- A-Layer-" << i << " ----------------" << std::endl;
-
-	// 		for (float value : layer) {
-	// 			out << value << ' ';
-	// 		}
-	// 		out << std::endl;
-
-	// 		++i;
-	// 	}
-
-	// 	i = 1;
-	// 	for (const auto& weight : obj.getWeights()) {
-	// 		out << "---------------- Weight-" << i << " ----------------" << std::endl;
-
-	// 		for (const auto& row : weight) {
-	// 			for (float value : row) {
-	// 				out << value << ' ';
-	// 			}
-	// 			out << std::endl;
-	// 		}
-
-	// 		++i;
-	// 	}
-
-	// 	return out;
-	// }
-
     double genRandomFloat( double min, double max ) {
-//        double r = static_cast<double>(rand()) / (static_cast<double>(RAND_MAX));
         double value;
-        value = rand() % (int)pow(10, 3);
-
-        // получить вещественное число
-        value = min + (value / pow(10, 3)) * (max - min);
+        value = rand() % (int)pow(10, 2);
+        value = min + (value / pow(10, 2)) * (max - min);
         return value;
     }
 
 } // namespace s21
+
 
