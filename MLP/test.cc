@@ -40,9 +40,23 @@ int main(){
     auto weights = matr.getWeights();
 
     matr.ComputeDelta(stoi(content[0][0]));
+    std::cout << "1" << std::endl;
+//    auto weight = matr.getWeights();
+    matr.MultiplyWeights(matr.getSLayer(), 0);
+    matr.MultiplyWeights(matr.getALayers()[0], 1);
+    matr.MultiplyWeights(matr.getALayers()[1], 2);
+    matr.MultiplyWeights(matr.getALayers()[2], 3);
 
-    auto weight = matr.getWeights();
+    matr.ComputeDelta(stoi(content[0][0]));
+//    auto weight = matr.getWeights();
+    std::cout << "2" << std::endl;
+    matr.MultiplyWeights(matr.getSLayer(), 0);
+    matr.MultiplyWeights(matr.getALayers()[0], 1);
+    matr.MultiplyWeights(matr.getALayers()[1], 2);
+    matr.MultiplyWeights(matr.getALayers()[2], 3);
 
+    matr.solve_errors(stoi(content[0][0]));
+    std::cout << "3" << std::endl;
 //    for (const auto row : matr.getALayers()[3]) {
 //        for (float elem : row)
 //            std::cout << row << " ";
@@ -77,22 +91,22 @@ int main(){
 
 //    std::cout << "\n--------------------------------------------------------------------------\n";
 
-        for (const auto & iter : weights[0]) {
-            for (auto i : iter) {
-                std::cout << i << " ";
-            }
-            std::cout << std::endl;
-        }
-
-    std::cout << "\n--------------------------------------------------------------------------\n";
-
-        auto weight_ = matr.getWeights();
-        for (const auto & iter : weight_[0]) {
-            for (auto i : iter) {
-                std::cout << i << " ";
-            }
-            std::cout << std::endl;
-        }
+//        for (const auto & iter : weights[0]) {
+//            for (auto i : iter) {
+//                std::cout << i << " ";
+//            }
+//            std::cout << std::endl;
+//        }
+//
+//    std::cout << "\n--------------------------------------------------------------------------\n";
+//
+//        auto weight_ = matr.getWeights();
+//        for (const auto & iter : weight_[0]) {
+//            for (auto i : iter) {
+//                std::cout << i << " ";
+//            }
+//            std::cout << std::endl;
+//        }
 
 //        for (const auto & iter : matr.getRLayer()) {
 //            std::cout << iter << std::endl;

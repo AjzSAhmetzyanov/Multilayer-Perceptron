@@ -74,7 +74,7 @@ namespace s21 {
         for (int i = 0; i < R_NEURONS_COUNT; i++) {
             system_errors += (errors[i] * errors[i]);
         }
-//        std::cout << system_errors << std::endl;
+        std::cout << system_errors << std::endl;
             return errors;
     }
 
