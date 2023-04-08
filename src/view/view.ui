@@ -1,0 +1,858 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>view</class>
+ <widget class="QMainWindow" name="view">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1200</width>
+    <height>880</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1200</width>
+    <height>880</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1200</width>
+    <height>880</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>view</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-image: url(:/images/bg.png);
+background-repeat: no-repeat;
+background-size: contain;
+background-position: center bottom;</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="render_scene" name="scene" native="true">
+    <property name="geometry">
+     <rect>
+      <x>850</x>
+      <y>460</y>
+      <width>351</width>
+      <height>401</height>
+     </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>699</width>
+      <height>16777215</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: white;
+ font-family: Arial;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bold;
+border-width: 6px;
+border-style: solid;
+border-color: green;</string>
+    </property>
+    <widget class="QTextEdit" name="predict">
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>0</y>
+       <width>81</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"> font-family: Arial;
+    font-size: 50px;
+    font-style: italic;
+    font-weight: bold;
+border-width: 6px;
+border-style: solid;
+border-color: green;</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="get_trainfile">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>80</y>
+      <width>191</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"> font-family: Arial;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bold;
+border-width: 6px;
+border-style: solid;
+border-color: green;
+</string>
+    </property>
+    <property name="text">
+     <string>TRAINING FILE</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="get_testfile">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>180</y>
+      <width>191</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"> font-family: Arial;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bold;
+border-width: 6px;
+border-style: solid;
+border-color: green;</string>
+    </property>
+    <property name="text">
+     <string>TESTING FILE</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="get_savefile">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>280</y>
+      <width>191</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"> font-family: Arial;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bold;
+border-width: 6px;
+border-style: solid;
+border-color: green;</string>
+    </property>
+    <property name="text">
+     <string>SAVING FILE</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_4">
+    <property name="geometry">
+     <rect>
+      <x>750</x>
+      <y>80</y>
+      <width>191</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"> font-family: Arial;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bold;
+border-width: 6px;
+border-style: solid;
+border-color: green;</string>
+    </property>
+    <property name="text">
+     <string>EPOCH COUNTS</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_5">
+    <property name="geometry">
+     <rect>
+      <x>750</x>
+      <y>180</y>
+      <width>191</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"> font-family: Arial;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bold;
+border-width: 6px;
+border-style: solid;
+border-color: green;</string>
+    </property>
+    <property name="text">
+     <string>LEARNING RATE</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_6">
+    <property name="geometry">
+     <rect>
+      <x>990</x>
+      <y>80</y>
+      <width>191</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"> font-family: Arial;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bold;
+border-width: 6px;
+border-style: solid;
+border-color: green;</string>
+    </property>
+    <property name="text">
+     <string>MATRIX VIEW</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_7">
+    <property name="geometry">
+     <rect>
+      <x>990</x>
+      <y>180</y>
+      <width>191</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"> font-family: Arial;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bold;
+border-width: 6px;
+border-style: solid;
+border-color: green;</string>
+    </property>
+    <property name="text">
+     <string>GRAPH VIEW</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="graph_view">
+    <property name="geometry">
+     <rect>
+      <x>1060</x>
+      <y>230</y>
+      <width>121</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"> font-family: Arial;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bold;
+border-width: 6px;
+border-style: solid;
+border-color: green;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="matrix_view">
+    <property name="geometry">
+     <rect>
+      <x>1060</x>
+      <y>130</y>
+      <width>121</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"> font-family: Arial;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bold;
+border-width: 6px;
+border-style: solid;
+border-color: green;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="epoch_count">
+    <property name="geometry">
+     <rect>
+      <x>840</x>
+      <y>130</y>
+      <width>101</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"> font-family: Arial;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bold;
+border-width: 6px;
+border-style: solid;
+border-color: green;</string>
+    </property>
+    <property name="value">
+     <number>5</number>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="start_train">
+    <property name="geometry">
+     <rect>
+      <x>740</x>
+      <y>10</y>
+      <width>201</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"> font-family: Arial;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bold;
+border-width: 6px;
+border-style: solid;
+border-color: green;</string>
+    </property>
+    <property name="text">
+     <string>START TRAINING</string>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_8">
+    <property name="geometry">
+     <rect>
+      <x>750</x>
+      <y>280</y>
+      <width>191</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"> font-family: Arial;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bold;
+border-width: 6px;
+border-style: solid;
+border-color: green;</string>
+    </property>
+    <property name="text">
+     <string>LAYER COUNTS</string>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="layer_count">
+    <property name="geometry">
+     <rect>
+      <x>840</x>
+      <y>330</y>
+      <width>101</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"> font-family: Arial;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bold;
+border-width: 6px;
+border-style: solid;
+border-color: green;</string>
+    </property>
+    <property name="value">
+     <number>4</number>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="learning_rate">
+    <property name="geometry">
+     <rect>
+      <x>840</x>
+      <y>230</y>
+      <width>101</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"> font-family: Arial;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bold;
+border-width: 6px;
+border-style: solid;
+border-color: green;</string>
+    </property>
+    <property name="value">
+     <double>0.100000000000000</double>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="start_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>401</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"> font-family: Arial;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bold;
+border-width: 6px;
+border-style: solid;
+border-color: green;</string>
+    </property>
+    <property name="text">
+     <string>TRAINING</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="start_3">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>80</y>
+      <width>201</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"> font-family: Arial;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bold;
+border-width: 6px;
+border-style: solid;
+border-color: green;</string>
+    </property>
+    <property name="text">
+     <string>MSE</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="start_4">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>80</y>
+      <width>201</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"> font-family: Arial;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bold;
+border-width: 6px;
+border-style: solid;
+border-color: green;</string>
+    </property>
+    <property name="text">
+     <string>TIME</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="train_mse">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>130</y>
+      <width>101</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"> font-family: Arial;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bold;
+border-width: 5px;
+border-style: solid;
+border-color: green;</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="train_time">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>130</y>
+      <width>101</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"> font-family: Arial;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bold;
+border-width: 5px;
+border-style: solid;
+border-color: green;</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="test_time">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>300</y>
+      <width>101</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"> font-family: Arial;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bold;
+border-width: 6px;
+border-style: solid;
+border-color: green;</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="start_5">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>180</y>
+      <width>401</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"> font-family: Arial;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bold;
+border-width: 6px;
+border-style: solid;
+border-color: green;</string>
+    </property>
+    <property name="text">
+     <string>TESTING</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="gdrdgb">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>250</y>
+      <width>201</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"> font-family: Arial;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bold;
+border-width: 6px;
+border-style: solid;
+border-color: green;</string>
+    </property>
+    <property name="text">
+     <string>ACCURACY</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="accuracy">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>300</y>
+      <width>101</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"> font-family: Arial;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bold;
+border-width: 6px;
+border-style: solid;
+border-color: green;</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="fesfs">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>250</y>
+      <width>201</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"> font-family: Arial;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bold;
+border-width: 6px;
+border-style: solid;
+border-color: green;</string>
+    </property>
+    <property name="text">
+     <string>TIME</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="start_test">
+    <property name="geometry">
+     <rect>
+      <x>500</x>
+      <y>10</y>
+      <width>201</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"> font-family: Arial;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bold;
+border-width: 6px;
+border-style: solid;
+border-color: green;</string>
+    </property>
+    <property name="text">
+     <string>START TESTING</string>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="start_ready">
+    <property name="geometry">
+     <rect>
+      <x>900</x>
+      <y>400</y>
+      <width>241</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"> font-family: Arial;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bold;
+border-width: 6px;
+border-style: solid;
+border-color: green;</string>
+    </property>
+    <property name="text">
+     <string>CLICK TO  PREDICT WORD</string>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="start_crossfs">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>350</y>
+      <width>401</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"> font-family: Arial;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bold;
+border-width: 6px;
+border-style: solid;
+border-color: green;</string>
+    </property>
+    <property name="text">
+     <string>START CROSS VALIDATION</string>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="fesfs_2">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>450</y>
+      <width>201</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"> font-family: Arial;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bold;
+border-width: 6px;
+border-style: solid;
+border-color: green;</string>
+    </property>
+    <property name="text">
+     <string>TIME</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="gdrdgb_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>450</y>
+      <width>201</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"> font-family: Arial;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bold;
+border-width: 6px;
+border-style: solid;
+border-color: green;</string>
+    </property>
+    <property name="text">
+     <string>ACCURACY</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="croos_time">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>500</y>
+      <width>101</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"> font-family: Arial;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bold;
+border-width: 6px;
+border-style: solid;
+border-color: green;</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="cross_accur">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>500</y>
+      <width>101</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"> font-family: Arial;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bold;
+border-width: 6px;
+border-style: solid;
+border-color: green;</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="start_cross">
+    <property name="geometry">
+     <rect>
+      <x>980</x>
+      <y>10</y>
+      <width>201</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"> font-family: Arial;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bold;
+border-width: 6px;
+border-style: solid;
+border-color: green;</string>
+    </property>
+    <property name="text">
+     <string>START CROSS-VAL</string>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="count_cross">
+    <property name="geometry">
+     <rect>
+      <x>1080</x>
+      <y>330</y>
+      <width>101</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"> font-family: Arial;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bold;
+border-width: 6px;
+border-style: solid;
+border-color: green;</string>
+    </property>
+    <property name="value">
+     <number>2</number>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_9">
+    <property name="geometry">
+     <rect>
+      <x>990</x>
+      <y>280</y>
+      <width>191</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"> font-family: Arial;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bold;
+border-width: 6px;
+border-style: solid;
+border-color: green;</string>
+    </property>
+    <property name="text">
+     <string>COUNT CROSS</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1200</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>аыуа]пяре</string>
+    </property>
+   </widget>
+   <addaction name="menu"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>render_scene</class>
+   <extends>QWidget</extends>
+   <header location="global">render_scene.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

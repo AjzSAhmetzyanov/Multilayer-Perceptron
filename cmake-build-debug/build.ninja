@@ -11,7 +11,7 @@
 # =============================================================================
 
 # =============================================================================
-# Project: Multilayer_Perceptron
+# Project: CPP7_MLP_1
 # Configurations: Debug
 # =============================================================================
 
@@ -39,13 +39,13 @@ include CMakeFiles/rules.ninja
 #############################################
 # Logical path to working directory; prefix for absolute paths.
 
-cmake_ninja_workdir = /Users/luigiket/Multilayer-Perceptron/cmake-build-debug/
+cmake_ninja_workdir = /Users/luigiket/CPP7_MLP-1/cmake-build-debug/
 
 #############################################
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /Users/luigiket/Multilayer-Perceptron/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake --regenerate-during-build -S/Users/luigiket/Multilayer-Perceptron -B/Users/luigiket/Multilayer-Perceptron/cmake-build-debug
+  COMMAND = cd /Users/luigiket/CPP7_MLP-1/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake --regenerate-during-build -S/Users/luigiket/CPP7_MLP-1 -B/Users/luigiket/CPP7_MLP-1/cmake-build-debug
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -57,71 +57,85 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /Users/luigiket/Multilayer-Perceptron/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  COMMAND = cd /Users/luigiket/CPP7_MLP-1/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
   DESC = No interactive CMake dialog available...
   restat = 1
 
 build edit_cache: phony CMakeFiles/edit_cache.util
 
 # =============================================================================
-# Object build statements for EXECUTABLE target Multilayer_Perceptron
+# Object build statements for EXECUTABLE target CPP7_MLP_1
 
 
 #############################################
-# Order-only phony target for Multilayer_Perceptron
+# Order-only phony target for CPP7_MLP_1
 
-build cmake_object_order_depends_target_Multilayer_Perceptron: phony || CMakeFiles/Multilayer_Perceptron.dir
+build cmake_object_order_depends_target_CPP7_MLP_1: phony || CMakeFiles/CPP7_MLP_1.dir
 
-build CMakeFiles/Multilayer_Perceptron.dir/MLP/build-view-Desktop_x86_darwin_generic_mach_o_64bit-Debug/moc_render_scene.cpp.o: CXX_COMPILER__Multilayer_Perceptron_Debug /Users/luigiket/Multilayer-Perceptron/MLP/build-view-Desktop_x86_darwin_generic_mach_o_64bit-Debug/moc_render_scene.cpp || cmake_object_order_depends_target_Multilayer_Perceptron
-  DEP_FILE = CMakeFiles/Multilayer_Perceptron.dir/MLP/build-view-Desktop_x86_darwin_generic_mach_o_64bit-Debug/moc_render_scene.cpp.o.d
+build CMakeFiles/CPP7_MLP_1.dir/src/controller/controller.cc.o: CXX_COMPILER__CPP7_MLP_1_Debug /Users/luigiket/CPP7_MLP-1/src/controller/controller.cc || cmake_object_order_depends_target_CPP7_MLP_1
+  DEP_FILE = CMakeFiles/CPP7_MLP_1.dir/src/controller/controller.cc.o.d
   FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6 -std=gnu++14
-  INCLUDES = -I/Users/luigiket/Multilayer-Perceptron/MLP/build-view-Desktop_x86_darwin_generic_mach_o_64bit-Debug -I/Users/luigiket/Multilayer-Perceptron/MLP/view
-  OBJECT_DIR = CMakeFiles/Multilayer_Perceptron.dir
-  OBJECT_FILE_DIR = CMakeFiles/Multilayer_Perceptron.dir/MLP/build-view-Desktop_x86_darwin_generic_mach_o_64bit-Debug
+  INCLUDES = -I/Users/luigiket/CPP7_MLP-1/src/controller -I/Users/luigiket/CPP7_MLP-1/src/Model/ActivateFunctions -I/Users/luigiket/CPP7_MLP-1/src/Model/Graph -I/Users/luigiket/CPP7_MLP-1/src/Model/Matrix -I/Users/luigiket/CPP7_MLP-1/src/Model/Network
+  OBJECT_DIR = CMakeFiles/CPP7_MLP_1.dir
+  OBJECT_FILE_DIR = CMakeFiles/CPP7_MLP_1.dir/src/controller
 
-build CMakeFiles/Multilayer_Perceptron.dir/MLP/build-view-Desktop_x86_darwin_generic_mach_o_64bit-Debug/moc_view.cpp.o: CXX_COMPILER__Multilayer_Perceptron_Debug /Users/luigiket/Multilayer-Perceptron/MLP/build-view-Desktop_x86_darwin_generic_mach_o_64bit-Debug/moc_view.cpp || cmake_object_order_depends_target_Multilayer_Perceptron
-  DEP_FILE = CMakeFiles/Multilayer_Perceptron.dir/MLP/build-view-Desktop_x86_darwin_generic_mach_o_64bit-Debug/moc_view.cpp.o.d
+build CMakeFiles/CPP7_MLP_1.dir/src/Model/ActivateFunctions/ActivateFunction.cpp.o: CXX_COMPILER__CPP7_MLP_1_Debug /Users/luigiket/CPP7_MLP-1/src/Model/ActivateFunctions/ActivateFunction.cpp || cmake_object_order_depends_target_CPP7_MLP_1
+  DEP_FILE = CMakeFiles/CPP7_MLP_1.dir/src/Model/ActivateFunctions/ActivateFunction.cpp.o.d
   FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6 -std=gnu++14
-  INCLUDES = -I/Users/luigiket/Multilayer-Perceptron/MLP/build-view-Desktop_x86_darwin_generic_mach_o_64bit-Debug -I/Users/luigiket/Multilayer-Perceptron/MLP/view
-  OBJECT_DIR = CMakeFiles/Multilayer_Perceptron.dir
-  OBJECT_FILE_DIR = CMakeFiles/Multilayer_Perceptron.dir/MLP/build-view-Desktop_x86_darwin_generic_mach_o_64bit-Debug
+  INCLUDES = -I/Users/luigiket/CPP7_MLP-1/src/controller -I/Users/luigiket/CPP7_MLP-1/src/Model/ActivateFunctions -I/Users/luigiket/CPP7_MLP-1/src/Model/Graph -I/Users/luigiket/CPP7_MLP-1/src/Model/Matrix -I/Users/luigiket/CPP7_MLP-1/src/Model/Network
+  OBJECT_DIR = CMakeFiles/CPP7_MLP_1.dir
+  OBJECT_FILE_DIR = CMakeFiles/CPP7_MLP_1.dir/src/Model/ActivateFunctions
 
-build CMakeFiles/Multilayer_Perceptron.dir/MLP/view/main.cpp.o: CXX_COMPILER__Multilayer_Perceptron_Debug /Users/luigiket/Multilayer-Perceptron/MLP/view/main.cpp || cmake_object_order_depends_target_Multilayer_Perceptron
-  DEP_FILE = CMakeFiles/Multilayer_Perceptron.dir/MLP/view/main.cpp.o.d
+build CMakeFiles/CPP7_MLP_1.dir/src/Model/Graph/GraphNeuron.cpp.o: CXX_COMPILER__CPP7_MLP_1_Debug /Users/luigiket/CPP7_MLP-1/src/Model/Graph/GraphNeuron.cpp || cmake_object_order_depends_target_CPP7_MLP_1
+  DEP_FILE = CMakeFiles/CPP7_MLP_1.dir/src/Model/Graph/GraphNeuron.cpp.o.d
   FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6 -std=gnu++14
-  INCLUDES = -I/Users/luigiket/Multilayer-Perceptron/MLP/build-view-Desktop_x86_darwin_generic_mach_o_64bit-Debug -I/Users/luigiket/Multilayer-Perceptron/MLP/view
-  OBJECT_DIR = CMakeFiles/Multilayer_Perceptron.dir
-  OBJECT_FILE_DIR = CMakeFiles/Multilayer_Perceptron.dir/MLP/view
+  INCLUDES = -I/Users/luigiket/CPP7_MLP-1/src/controller -I/Users/luigiket/CPP7_MLP-1/src/Model/ActivateFunctions -I/Users/luigiket/CPP7_MLP-1/src/Model/Graph -I/Users/luigiket/CPP7_MLP-1/src/Model/Matrix -I/Users/luigiket/CPP7_MLP-1/src/Model/Network
+  OBJECT_DIR = CMakeFiles/CPP7_MLP_1.dir
+  OBJECT_FILE_DIR = CMakeFiles/CPP7_MLP_1.dir/src/Model/Graph
 
-build CMakeFiles/Multilayer_Perceptron.dir/MLP/view/render_scene.cpp.o: CXX_COMPILER__Multilayer_Perceptron_Debug /Users/luigiket/Multilayer-Perceptron/MLP/view/render_scene.cpp || cmake_object_order_depends_target_Multilayer_Perceptron
-  DEP_FILE = CMakeFiles/Multilayer_Perceptron.dir/MLP/view/render_scene.cpp.o.d
+build CMakeFiles/CPP7_MLP_1.dir/src/Model/Graph/GraphPerceptron.cpp.o: CXX_COMPILER__CPP7_MLP_1_Debug /Users/luigiket/CPP7_MLP-1/src/Model/Graph/GraphPerceptron.cpp || cmake_object_order_depends_target_CPP7_MLP_1
+  DEP_FILE = CMakeFiles/CPP7_MLP_1.dir/src/Model/Graph/GraphPerceptron.cpp.o.d
   FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6 -std=gnu++14
-  INCLUDES = -I/Users/luigiket/Multilayer-Perceptron/MLP/build-view-Desktop_x86_darwin_generic_mach_o_64bit-Debug -I/Users/luigiket/Multilayer-Perceptron/MLP/view
-  OBJECT_DIR = CMakeFiles/Multilayer_Perceptron.dir
-  OBJECT_FILE_DIR = CMakeFiles/Multilayer_Perceptron.dir/MLP/view
+  INCLUDES = -I/Users/luigiket/CPP7_MLP-1/src/controller -I/Users/luigiket/CPP7_MLP-1/src/Model/ActivateFunctions -I/Users/luigiket/CPP7_MLP-1/src/Model/Graph -I/Users/luigiket/CPP7_MLP-1/src/Model/Matrix -I/Users/luigiket/CPP7_MLP-1/src/Model/Network
+  OBJECT_DIR = CMakeFiles/CPP7_MLP_1.dir
+  OBJECT_FILE_DIR = CMakeFiles/CPP7_MLP_1.dir/src/Model/Graph
 
-build CMakeFiles/Multilayer_Perceptron.dir/MLP/view/view.cpp.o: CXX_COMPILER__Multilayer_Perceptron_Debug /Users/luigiket/Multilayer-Perceptron/MLP/view/view.cpp || cmake_object_order_depends_target_Multilayer_Perceptron
-  DEP_FILE = CMakeFiles/Multilayer_Perceptron.dir/MLP/view/view.cpp.o.d
+build CMakeFiles/CPP7_MLP_1.dir/src/Model/Matrix/Matrix.cpp.o: CXX_COMPILER__CPP7_MLP_1_Debug /Users/luigiket/CPP7_MLP-1/src/Model/Matrix/Matrix.cpp || cmake_object_order_depends_target_CPP7_MLP_1
+  DEP_FILE = CMakeFiles/CPP7_MLP_1.dir/src/Model/Matrix/Matrix.cpp.o.d
   FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6 -std=gnu++14
-  INCLUDES = -I/Users/luigiket/Multilayer-Perceptron/MLP/build-view-Desktop_x86_darwin_generic_mach_o_64bit-Debug -I/Users/luigiket/Multilayer-Perceptron/MLP/view
-  OBJECT_DIR = CMakeFiles/Multilayer_Perceptron.dir
-  OBJECT_FILE_DIR = CMakeFiles/Multilayer_Perceptron.dir/MLP/view
+  INCLUDES = -I/Users/luigiket/CPP7_MLP-1/src/controller -I/Users/luigiket/CPP7_MLP-1/src/Model/ActivateFunctions -I/Users/luigiket/CPP7_MLP-1/src/Model/Graph -I/Users/luigiket/CPP7_MLP-1/src/Model/Matrix -I/Users/luigiket/CPP7_MLP-1/src/Model/Network
+  OBJECT_DIR = CMakeFiles/CPP7_MLP_1.dir
+  OBJECT_FILE_DIR = CMakeFiles/CPP7_MLP_1.dir/src/Model/Matrix
+
+build CMakeFiles/CPP7_MLP_1.dir/src/Model/Network/Network.cpp.o: CXX_COMPILER__CPP7_MLP_1_Debug /Users/luigiket/CPP7_MLP-1/src/Model/Network/Network.cpp || cmake_object_order_depends_target_CPP7_MLP_1
+  DEP_FILE = CMakeFiles/CPP7_MLP_1.dir/src/Model/Network/Network.cpp.o.d
+  FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6 -std=gnu++14
+  INCLUDES = -I/Users/luigiket/CPP7_MLP-1/src/controller -I/Users/luigiket/CPP7_MLP-1/src/Model/ActivateFunctions -I/Users/luigiket/CPP7_MLP-1/src/Model/Graph -I/Users/luigiket/CPP7_MLP-1/src/Model/Matrix -I/Users/luigiket/CPP7_MLP-1/src/Model/Network
+  OBJECT_DIR = CMakeFiles/CPP7_MLP_1.dir
+  OBJECT_FILE_DIR = CMakeFiles/CPP7_MLP_1.dir/src/Model/Network
+
+build CMakeFiles/CPP7_MLP_1.dir/src/Model/test.cc.o: CXX_COMPILER__CPP7_MLP_1_Debug /Users/luigiket/CPP7_MLP-1/src/Model/test.cc || cmake_object_order_depends_target_CPP7_MLP_1
+  DEP_FILE = CMakeFiles/CPP7_MLP_1.dir/src/Model/test.cc.o.d
+  FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6 -std=gnu++14
+  INCLUDES = -I/Users/luigiket/CPP7_MLP-1/src/controller -I/Users/luigiket/CPP7_MLP-1/src/Model/ActivateFunctions -I/Users/luigiket/CPP7_MLP-1/src/Model/Graph -I/Users/luigiket/CPP7_MLP-1/src/Model/Matrix -I/Users/luigiket/CPP7_MLP-1/src/Model/Network
+  OBJECT_DIR = CMakeFiles/CPP7_MLP_1.dir
+  OBJECT_FILE_DIR = CMakeFiles/CPP7_MLP_1.dir/src/Model
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target Multilayer_Perceptron
+# Link build statements for EXECUTABLE target CPP7_MLP_1
 
 
 #############################################
-# Link the executable Multilayer_Perceptron
+# Link the executable CPP7_MLP_1
 
-build Multilayer_Perceptron: CXX_EXECUTABLE_LINKER__Multilayer_Perceptron_Debug CMakeFiles/Multilayer_Perceptron.dir/MLP/build-view-Desktop_x86_darwin_generic_mach_o_64bit-Debug/moc_render_scene.cpp.o CMakeFiles/Multilayer_Perceptron.dir/MLP/build-view-Desktop_x86_darwin_generic_mach_o_64bit-Debug/moc_view.cpp.o CMakeFiles/Multilayer_Perceptron.dir/MLP/view/main.cpp.o CMakeFiles/Multilayer_Perceptron.dir/MLP/view/render_scene.cpp.o CMakeFiles/Multilayer_Perceptron.dir/MLP/view/view.cpp.o
+build CPP7_MLP_1: CXX_EXECUTABLE_LINKER__CPP7_MLP_1_Debug CMakeFiles/CPP7_MLP_1.dir/src/controller/controller.cc.o CMakeFiles/CPP7_MLP_1.dir/src/Model/ActivateFunctions/ActivateFunction.cpp.o CMakeFiles/CPP7_MLP_1.dir/src/Model/Graph/GraphNeuron.cpp.o CMakeFiles/CPP7_MLP_1.dir/src/Model/Graph/GraphPerceptron.cpp.o CMakeFiles/CPP7_MLP_1.dir/src/Model/Matrix/Matrix.cpp.o CMakeFiles/CPP7_MLP_1.dir/src/Model/Network/Network.cpp.o CMakeFiles/CPP7_MLP_1.dir/src/Model/test.cc.o
   FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6
-  OBJECT_DIR = CMakeFiles/Multilayer_Perceptron.dir
+  OBJECT_DIR = CMakeFiles/CPP7_MLP_1.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_FILE = Multilayer_Perceptron
-  TARGET_PDB = Multilayer_Perceptron.dbg
+  TARGET_FILE = CPP7_MLP_1
+  TARGET_PDB = CPP7_MLP_1.dbg
 
 # =============================================================================
 # Target aliases.
@@ -132,9 +146,9 @@ build Multilayer_Perceptron: CXX_EXECUTABLE_LINKER__Multilayer_Perceptron_Debug 
 # =============================================================================
 
 #############################################
-# Folder: /Users/luigiket/Multilayer-Perceptron/cmake-build-debug
+# Folder: /Users/luigiket/CPP7_MLP-1/cmake-build-debug
 
-build all: phony Multilayer_Perceptron
+build all: phony CPP7_MLP_1
 
 # =============================================================================
 # Built-in targets

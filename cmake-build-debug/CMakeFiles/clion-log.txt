@@ -1,4 +1,13 @@
-/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/ninja -G Ninja /Users/luigiket/Multilayer-Perceptron
+/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/ninja -G Ninja /Users/luigiket/CPP7_MLP-1
 -- Configuring done
--- Generating done
--- Build files have been written to: /Users/luigiket/Multilayer-Perceptron/cmake-build-debug
+CMake Error at CMakeLists.txt:13 (add_executable):
+  Cannot find source file:
+
+    src/controller/controller.cc
+
+
+CMake Error at CMakeLists.txt:13 (add_executable):
+  No SOURCES given to target: CPP7_MLP_1
+
+
+CMake Generate step failed.  Build files cannot be regenerated correctly.

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MultiplayerPerceptron</title>
+    <style>
+        body {
+            background-color: #f1f1f1;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        h1, h2, h3 {
+            color: #333;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 2rem;
+        }
+        p {
+            margin: 1.5rem auto;
+            text-align: justify;
+        }
+        div {
+            max-width: 800px;
+            margin: 150px auto;
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        button {
+            background-color: #4CAF50;
+            border: none;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #3e8e41;
+        }
+        input[type=file] {
+            margin: 1rem auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <h1>Реализация Multiplayer Perceptron</h1>
+    <h2>О программе</h2>
+    <p>В данном проекте реализована простейшая искусственная нейронная сеть в виде перцептрона,
+        которая может быть обучена на открытом наборе данных и осуществлять распознавание 26 рукописных букв латинского алфавита.</p>
+
+    <h2>Как работать с приложением</h2>
+    <p>Если хотите получить предсказанную букву, используя готовые веса, просто нарисуйте букву и нажмите "click to predict word".</p>
+    <p> Если хотите тренировать модель, выберите файл с тренировочным датасетом (нажмите "training file") и место чтобы сохранить веса (нажмите "saving file"), далее нажмите "start training".</p>
+    <p> Если хотите тестить модель, выберите файл с тестовым датасетом (нажмите "testing file") и место чтобы сохранить веса (нажмите "saving file"), далее нажмите "start testing".</p>
+    <p>Запустить кросс-валидацию "start cross-val".</p>
+    <p>"epoch count" - менять количество эпох, "learning rate" - скорость обучения, "layer count" - количество слоев, "matrix view/graph view" - переключатель на графовое и матричное представление, "count cross" - количество делений для кросс-валидации.</p>
+
+    <h2>Установка</h2>
+    <p>Для того, чтобы запустить проект вам нужно использовать команду make install.</p>
+
+    <h2>Удаление</h2>
+    <p>Для удаления программы вы можете использовать команду make uninstall.</p>
+
+    <h2>Запуск тестов</h2>
+    <p>Для запуска тестов make test</p>
+
+    <h2>Архивация</h2>
+    <p>Для архивации make dist</p>
+</div>
+</body>
+</html>
